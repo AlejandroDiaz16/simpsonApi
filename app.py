@@ -8,10 +8,35 @@ app = Flask(__name__)
 api = Api(app)
 
 
+class Content(Resource):
+    def get(self):
+        ip = 'http://127.0.0.1:5000/api/'
+        content = {}
+        content['data'] = []
+        content['data'].append({
+            'character': ip.__add__('characters'),
+            'locations': ip.__add__('locations'),
+            'cities': ip.__add__('cities'),
+            'episodes': ip.__add__('episodes')
+        })
+        return jsonify(content)
+
+
 class Characters(Resource):
     def get(self):
-        conn = db_connect.connect() #hace la conexion
-        query = conn.execute("select * from characters") #ejecuta el query y retorna un json
+        nameQuery = request.args.get('name', None)
+        genderQuery = request.args.get('gender', None)
+        statusQuery = request.args.get('status', None)
+        conn = db_connect.connect()  # hace la conexion
+        if nameQuery:
+            query = conn.execute("select * from characters where name like '%{}%' ".format(str(nameQuery)))
+        elif genderQuery:
+            query = conn.execute("select * from characters where gender like '%{}%' ".format(str(genderQuery)))
+        elif statusQuery:
+            query = conn.execute("select * from characters where status like '%{}%' ".format(str(statusQuery)))
+        else:
+            cantidad = conn.execute("select count(*) from characters")
+            query = conn.execute("select * from characters")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
@@ -31,7 +56,17 @@ class Characters(Resource):
 class Locations(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute("select * from locations")
+        nameQuery = request.args.get('name', None)
+        typeQuery = request.args.get('type', None)
+        useQuery = request.args.get('use', None)
+        if nameQuery:
+            query = conn.execute("select * from locations where name like '%{}%' ".format(str(nameQuery)))
+        elif typeQuery:
+            query = conn.execute("select * from locations where type like '%{}%' ".format(str(typeQuery)))
+        elif useQuery:
+            query = conn.execute("select * from locations where use like '%{}%' ".format(str(useQuery)))
+        else:
+            query = conn.execute("select * from locations")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
@@ -39,14 +74,35 @@ class Locations(Resource):
 class Episodes(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute("select * from episodes")
+        nameQuery = request.args.get('name', None)
+        episodeQuery = request.args.get('episode', None)
+        dateQuery = request.args.get('date', None)
+        seasonQuery = request.args.get('season', None)
+        if nameQuery:
+            query = conn.execute("select * from episodes where name like '%{}%' ".format(str(nameQuery)))
+        elif episodeQuery:
+            query = conn.execute("select * from episodes where episode like '%{}%' ".format(int(episodeQuery)))
+        elif dateQuery:
+            query = conn.execute("select * from episodes where air_date like '%{}%' ".format(str(dateQuery)))
+        elif seasonQuery:
+            query = conn.execute("select * from episodes where season like '%{}%' ".format(int(seasonQuery)))
+        else:
+            query = conn.execute("select * from episodes")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
+
 
 class Cities(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute("select * from cities")
+        nameQuery = request.args.get('name', None)
+        populationQuery = request.args.get('type', None)
+        if nameQuery:
+            query = conn.execute("select * from cities where name like '%{}%' ".format(str(nameQuery)))
+        elif populationQuery:
+            query = conn.execute("select * from cities where population like '%{}%' ".format(int(populationQuery)))
+        else:
+            query = conn.execute("select * from cities")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
@@ -58,7 +114,7 @@ class CharactersData(Resource):
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
-    def put(self,character_id):
+    def put(self, character_id):
         type = request.args['type']
         change = request.args['value']
         conn = db_connect.connect()
@@ -78,7 +134,7 @@ class LocationsData(Resource):
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
-    def put(self,location_id):
+    def put(self, location_id):
         type = request.args['type']
         change = request.args['value']
         conn = db_connect.connect()
@@ -90,6 +146,7 @@ class LocationsData(Resource):
         query = conn.execute("delete from locations where rowid= %d" % int(location_id))
         return {'status': 'Character number %d deleted' % int(location_id)}
 
+
 class EpisodesData(Resource):
     def get(self, episode_id):
         conn = db_connect.connect()
@@ -97,7 +154,7 @@ class EpisodesData(Resource):
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
-    def put(self,episode_id):
+    def put(self, episode_id):
         type = request.args['type']
         change = request.args['value']
         conn = db_connect.connect()
@@ -109,6 +166,7 @@ class EpisodesData(Resource):
         query = conn.execute("delete from episodes where rowid= %d" % int(episode_id))
         return {'status': 'Character number %d deleted' % int(episode_id)}
 
+
 class CitiesData(Resource):
     def get(self, city_id):
         conn = db_connect.connect()
@@ -116,7 +174,7 @@ class CitiesData(Resource):
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
-    def put(self,city_id):
+    def put(self, city_id):
         type = request.args['type']
         change = request.args['value']
         conn = db_connect.connect()
@@ -128,16 +186,16 @@ class CitiesData(Resource):
         query = conn.execute("delete from cities where rowid= %d" % int(city_id))
         return {'status': 'Character number %d deleted' % int(city_id)}
 
-api.add_resource(Characters, '/characters') #
-api.add_resource(Locations, '/locations')
-api.add_resource(Cities, '/cities')
-api.add_resource(Episodes, '/episodes')
-api.add_resource(CharactersData, '/characters/<character_id>') #route with parameter for changes
-api.add_resource(LocationsData, '/locations/<location_id>')
-api.add_resource(EpisodesData, '/episodes/<episode_id>')
-api.add_resource(CitiesData, '/cities/<city_id>')
+
+api.add_resource(Content, '/api', '/api/')
+api.add_resource(Characters, '/api/characters')
+api.add_resource(Locations, '/api/locations')
+api.add_resource(Cities, '/api/cities')
+api.add_resource(Episodes, '/api/episodes')
+api.add_resource(CharactersData, '/api/characters/<character_id>')  # route with parameter for changes
+api.add_resource(LocationsData, '/api/locations/<location_id>')
+api.add_resource(EpisodesData, '/api/episodes/<episode_id>')
+api.add_resource(CitiesData, '/api/cities/<city_id>')
 
 if __name__ == '__main__':
     app.run(port='5000')
-
-
