@@ -198,4 +198,4 @@ api.add_resource(EpisodesData, '/api/episodes/<episode_id>')
 api.add_resource(CitiesData, '/api/cities/<city_id>')
 
 if __name__ == '__main__':
-    app.run(port='5000')
+    app.run(debug=True)

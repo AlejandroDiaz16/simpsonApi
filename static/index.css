@@ -1,0 +1,21 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-brand img {
+	height: 50px;
+}
+
+.character {
+	height: 200px;
+	width: 500px;
+}
+.character_image {
+	height: inherit;
+	text-align: center;
+}
+.character_image img{
+	height: inherit;
+}
+
