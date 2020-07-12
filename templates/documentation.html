@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Documentation</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="../static/documentation.css">
+</head>
+<body>
+	<!-- header -->
+	<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+		<div class="container">
+			<!-- <img src="../static/img/logo1.png" alt="logo"> -->
+			<a class="navbar-brand" href="#">
+				<img src="../static/img/logo1.png" alt="logo">
+			</a>
+			<a class="navbar-brand">The simpsons Api</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Documentation</a>
+					</li>
+				</ul>
+			</div>
+		</div>	
+	</nav>
+	<!-- fin header -->
+	<!-- wallpaper -->
+	<div class="wallpaper container-fluid">
+		<div class="title ">
+			<span>The simpsons Api</span>
+		</div>
+	</div>
+	<!-- wallpaper -->
+	<div class="container-fluid">
+		<div class="row mt-3">
+			<div class="col-sm-12 col-md-3">
+				<h5>Getting Started</h5>
+				<ul class="list-group options mb-2">
+					<li class="list-group-item">Introduction</li>
+					<li class="list-group-item">Getting started</li>
+					<li class="list-group-item">Base URL</li>
+					<li class="list-group-item">Rate limiting</li>
+					<li class="list-group-item">Authentication</li>
+					<li class="list-group-item">Searching</li>
+				</ul>
+				<h5>Resources</h5>
+				<ul class="list-group options mb-3">
+					<li class="list-group-item">Root</li>
+					<li class="list-group-item">Character</li>
+					<li class="list-group-item">Locations</li>
+					<li class="list-group-item">Cities</li>
+					<li class="list-group-item">Episodes</li>
+				</ul>
+			</div>
+			<div class="col-sm-12 col-md-9">
+				<h1>Documentation</h1>
+				<hr>
+				<h3 id="Intro">Introduction</h3>
+				<p>Welcome to the Simpsons Api! This documentation should help you familiarise yourself with the resources available and how to consume them with HTTP request.
+					Please read the documentation before start your consults in this way you are going to know all the posibilities that you have with this amaizing Api. 
+				</p>
+				<hr>
+				<h3>Getting started</h3>
+				<span class="api-link">Link API: <p>http://sergobustos1.pythonanywhere.com/api/</p></span><br>
+				<p>Let's make our firt API request to the simpsons API!</p>
+				<p>You have many options to do the search you can use <a class="links" href="https://www.postman.com/" target="blank"><p>Postman</p></a>
+					, your console or the one that you prefer. Let's try with Postman.
+					JSON is the standart data format provided by the API by default.
+				</p>
+				<figure><img class="small-image" src="../static/img/img1.png" alt="get source"></figure>
+				<p>We'll use Postman four our examples because it´s really easy to use and it show us the data formated, but you can use curl or directly make the request on you browser.</p>
+				<p>Here is the response we get:</p>
+				<figure><img src="../static/img/img2.png" alt="example 1"></figure>
+				<p>If tour response looks different don't worry. This is probably because more details or parameteres have been added to the API since we made this documentation.</p>
+				<hr>
+				<h3>Base URL</h3>
+				<p>The <strong>Base URL</strong>is the root URL for all the API. If you ever make a request to <strong>The simpsons Api</strong> and you get back a <strong>404 NOT FOUND</strong>
+					check this URL first:
+				</p>
+				<figure><img class="small-image" src="../static/img/img3.png" alt="example request"></figure>
+				<p>The documentation below assumes you are going to use the Base Url to the endpoints in order to do multiple request</p>
+				<hr>
+				<h3>Rate limiting</h3>
+				<p><strong>The simpsons API</strong> don't limit the petitions that you can do daily but in order to help people in multiple areas like school, job or practice skills making petitions to an API</p>
+				<hr>
+				<h3>Authentication</h3>
+				<p><strong>The simpsons API</strong> is  a <strong>completely</strong> open <strong>API</strong>. No authentication is required to query and get data. This also mean that we have limited what you can do to just GET the data.
+					If you have mising information or any mistake please <a href=""><p>Send us a message</p></a> and we are going to solve this quicly.
+				</p>
+				<hr>
+				<h3>Searching</h3>
+				<p>All resources support <strong>Search</strong> parameters that filter the information you got. This allows you to make queries like:</p>
+				<span class="badge badge-secondary">http://sergobustos1.pythonanywhere.com/api/characters?status=alive</span>
+				<p>All searches will use case-sensitive partial matches on the set of search field. To see the set of search fields for each Resource, check out the individual documentation.</p>
+				<hr>
+				<h1>Resources</h1>
+				<h3>Root</h3>
+				<p>The Root source provides information on all available resources within the API.</p>
+				<p>Example request</p>
+				<figure><img class="small-image" src="../static/img/img3.png" alt="example request"></figure>
+				<p>Example response:</p>
+				<figure><img src="../static/img/img4.png" alt="example response"></figure>
+				<p>Attributes:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">Characters</span>
+						<em>string</em>
+						<p>-- The URL root for Characters resource</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">Locations</span>
+						<em>string</em>
+						<p>-- The URL root for Locations resource</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">Cities</span>
+						<em>string</em>
+						<p>-- The URL root for Cities resource</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">Episodes</span>
+						<em>string</em>
+						<p>-- The URL root for Episodes resource</p>
+					</li>
+				</ul>
+				<hr>
+				<!-- characters -->
+				<h3>Characters</h3>
+				<p>A character resource is an individual person or character within the Simpsons Universe.</p>
+				<br>
+				<p>Endpoints:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">/characters</span>
+						<p>-- get all the character in the resource</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">/characters/id</span>
+						<p>-- get a specific character</p>
+					</li>
+				</ul>
+				<p>Example request:</p>
+				<figure><img class="small-image" src="../static/img/img5.png" alt="example request"></figure>
+				<p>Example response:</p>
+				<figure><img src="../static/img/img6.png" alt="example response"></figure>
+				<p>Attributes:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<em>string</em>
+						<p>-- The name of this character.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">age</span>
+						<em>string</em>
+						<p>-- The age of this character.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">status</span>
+						<em>string</em>
+						<p>-- The status of this character. Will be "alive" or "dead".</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">gender</span>
+						<em>string</em>
+						<p>-- The gender of this character. Will be "Male" or "Female".</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">image</span>
+						<em>string</em>
+						<p>-- The link od our server where is located the .png image for this character</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">created</span>
+						<em>string</em>
+						<p>-- the date when was created this character. Will be "mm/dd/yyyy"</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">edited</span>
+						<em>string</em>
+						<p>-- the date when was edited this character. Will be "mm/dd/yyyy"</p>
+					</li>
+				</ul>
+				<p>Search Parameters</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<p>-- filter by name</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">status</span>
+						<p>-- filter by status</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">age</span>
+						<p>-- filter by age</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">gender</span>
+						<p>-- filter by gender</p>
+					</li>
+				</ul>
+				<hr>
+				<!-- end characters -->
+				<!-- locations -->
+				<h3>Locations</h3>
+				<p>A location resource is a building with a specific activity like banks, stores, public building.</p>
+				<br>
+				<p>Endpoints:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">/locations</span>
+						<p>-- get all the locations</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">/location/id</span>
+						<p>-- get a specific location</p>
+					</li>
+				</ul>
+				<p>Example request:</p>
+				<figure><img class="small-image" src="../static/img/img7.png" alt="example request"></figure>
+				<p>Example response:</p>
+				<figure><img src="../static/img/img8.png" alt="example response"></figure>
+				<p>Attributes:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<em>string</em>
+						<p>-- The name of this location.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">type</span>
+						<em>string</em>
+						<p>-- The type of the location. Example: goverment building, banks or market.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">Use</span>
+						<em>string</em>
+						<p>-- The specific use. Example: Bank, CityHall, Bar, Store.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">created</span>
+						<em>string</em>
+						<p>-- the date when was created this location. Will be "mm/dd/yyyy"</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">edited</span>
+						<em>string</em>
+						<p>-- the date when was edited this location. Will be "mm/dd/yyyy"</p>
+					</li>
+				</ul>
+				<p>Search Parameters</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<p>-- filter by name</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">type</span>
+						<p>-- filter by type</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">use</span>
+						<p>-- filter by use</p>
+					</li>
+				</ul>
+				<hr>
+				<!-- end locations -->
+				<!-- cities -->
+				<h3>Cities</h3>
+				<p>A city resource is a specific place in the simpsons universe.</p>
+				<br>
+				<p>Endpoints:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">/cities</span>
+						<p>-- get all the cities</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">/cities/id</span>
+						<p>-- get a specific city</p>
+					</li>
+				</ul>
+				<p>Example request:</p>
+				<figure><img class="small-image" src="../static/img/img9.png" alt="example request"></figure>
+				<p>Example response:</p>
+				<figure><img src="../static/img/img10.png" alt="example response"></figure>
+				<p>Attributes:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<em>string</em>
+						<p>-- The name of this city.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">population</span>
+						<em>string</em>
+						<p>-- The estimated population of this city.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">image</span>
+						<em>string</em>
+						<p>-- The link where is located the image of this city.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">created</span>
+						<em>string</em>
+						<p>-- the date when was created this city. Will be "mm/dd/yyyy"</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">edited</span>
+						<em>string</em>
+						<p>-- the date when was edited this city. Will be "mm/dd/yyyy"</p>
+					</li>
+				</ul>
+				<p>Search Parameters</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<p>-- filter by name</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">population</span>
+						<p>-- filter by rangs of population. To use this send two parameters <strong>populationinit</strong>
+							with a number and <strong>populationend</strong> also with a number
+						</p>
+					</li>
+				</ul>
+				<hr>
+				<!-- end cities -->
+				<!-- episodes -->
+				<h3>Episodes</h3>
+				<p>An episode resource is a chapter of the simpsons universe</p>
+				<br>
+				<p>Endpoints:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">/episodes</span>
+						<p>-- get all the episodes</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">/episodes/id</span>
+						<p>-- get a specific episode</p>
+					</li>
+				</ul>
+				<p>Example request:</p>
+				<figure><img class="small-image" src="../static/img/img11.png" alt="example request"></figure>
+				<p>Example response:</p>
+				<figure><img src="../static/img/img12.png" alt="example response"></figure>
+				<p>Attributes:</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<em>string</em>
+						<p>-- The name of this episode.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">air_date</span>
+						<em>string</em>
+						<p>-- The date when was launched this episode.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">season</span>
+						<em>string</em>
+						<p>-- The season of this episode.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">episode</span>
+						<em>string</em>
+						<p>-- The number of the episode in the simpsons Universe.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">created</span>
+						<em>string</em>
+						<p>-- the date when was created this episode. Will be "mm/dd/yyyy"</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">edited</span>
+						<em>string</em>
+						<p>-- the date when was edited this episode. Will be "mm/dd/yyyy"</p>
+					</li>
+				</ul>
+				<p>Search Parameters</p>
+				<ul>
+					<li>
+						<span class="badge badge-secondary">name</span>
+						<p>-- filter by name</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">season</span>
+						<p>-- filter by season</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">episode</span>
+						<p>-- filter by number of the episode</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">date</span>
+						<p>-- filter by the date of the episode. Example mm/dd/yyyy as a string</p>
+					</li>
+				</ul>
+				<hr>
+				<!-- end locations -->
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../static/index.js"></script>
+</body>
+</html>
