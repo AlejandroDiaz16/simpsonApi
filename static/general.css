@@ -51,3 +51,7 @@ hr {
 #footer a {
 	color:whitesmoke ;
 }
+
+a {
+	cursor: pointer;
+}

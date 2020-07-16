@@ -13,23 +13,23 @@
 	<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 		<div class="container">
 			<!-- <img src="../static/img/logo1.png" alt="logo"> -->
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" onclick="handlerApi('')">
 				<img src="../static/img/logo1.png" alt="logo">
 			</a>
-			<a class="navbar-brand" href="index.html">The simpsons Api</a>
+			<a class="navbar-brand" onclick="handlerApi('')">The simpsons Api</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" onclick="handlerApi('')">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="about.html">About</a>
+						<a class="nav-link" onclick="handlerApi('/about')">About</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="documentation.html">Documentation</a>
+						<a class="nav-link" onclick="handlerApi('/documentation')">Documentation</a>
 					</li>
 				</ul>
 			</div>
@@ -208,13 +208,13 @@
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-12 col-lg">
-				<a href="index.html">Home</a>
+				<a onclick="handlerApi('')">Home</a>
 			</div>
 			<div class="col-12 col-lg">
-				<a href="about.html">About</a>
+				<a onclick="handlerApi('/about')">About</a>
 			</div>
 			<div class="col-12 col-lg">
-				<a href="documentation">Documentation</a>
+				<a onclick="handlerApi('/documentation')">Documentation</a>
 			</div>
 		</div>
 	</div>

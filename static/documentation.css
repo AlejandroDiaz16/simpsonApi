@@ -20,6 +20,9 @@ figure img {
 	background-color: #343a40;
 	color: white;
 }
+.options li a {
+	color: white;
+}
 
 .links {
 	color: blue;

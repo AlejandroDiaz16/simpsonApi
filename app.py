@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 
@@ -10,7 +10,7 @@ api = Api(app)
 
 class Content(Resource):
     def get(self):
-        ip = 'http://127.0.0.1:5000/api/'
+        ip = 'http://sergobustos1.pythonanywhere.com/api/'
         content = {}
         content['data'] = []
         content['data'].append({
@@ -27,30 +27,26 @@ class Characters(Resource):
         nameQuery = request.args.get('name', None)
         genderQuery = request.args.get('gender', None)
         statusQuery = request.args.get('status', None)
+        ageeQuery = request.args.get('age', None)
+        ageQuery = request.args.get('-age', None)
+        apparitionQuery = request.args.get('apparition',None)
         conn = db_connect.connect()  # hace la conexion
         if nameQuery:
             query = conn.execute("select * from characters where name like '%{}%' ".format(str(nameQuery)))
         elif genderQuery:
             query = conn.execute("select * from characters where gender like '%{}%' ".format(str(genderQuery)))
+        elif ageeQuery:
+            query = conn.execute("select * from characters where age > {} ".format(int(ageeQuery)))
+        elif apparitionQuery:
+            query = conn.execute("select * from characters where apparition like '%{}%' ".format(str(apparitionQuery)))
+        elif ageQuery:
+            query = conn.execute("select * from characters where age < {} ".format(int(ageQuery)))
         elif statusQuery:
             query = conn.execute("select * from characters where status like '%{}%' ".format(str(statusQuery)))
         else:
-            cantidad = conn.execute("select count(*) from characters")
             query = conn.execute("select * from characters")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
-
-    def post(self):
-        conn = db_connect.connect()
-        name = request.args['name']
-        gender = request.args['gender']
-        status = request.args['status']
-        occupation = request.args['occupation']
-        image = request.args['image']
-        query = conn.execute("insert into characters values('{}','{}','{}','{}','{}')".format(
-            name, gender, status, occupation, image
-        ))
-        return {'status': 'nuevo personaje añadido'}
 
 
 class Locations(Resource):
@@ -96,11 +92,14 @@ class Cities(Resource):
     def get(self):
         conn = db_connect.connect()
         nameQuery = request.args.get('name', None)
-        populationQuery = request.args.get('type', None)
+        populationQuery = request.args.get('-population', None)
+        populationplusQuery = request.args.get('population', None)
         if nameQuery:
             query = conn.execute("select * from cities where name like '%{}%' ".format(str(nameQuery)))
+        elif populationplusQuery:
+            query = conn.execute("select * from cities where population > {} ".format(int(populationplusQuery)))
         elif populationQuery:
-            query = conn.execute("select * from cities where population like '%{}%' ".format(int(populationQuery)))
+            query = conn.execute("select * from cities where population < {} ".format(int(populationQuery)))
         else:
             query = conn.execute("select * from cities")
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
@@ -110,92 +109,140 @@ class Cities(Resource):
 class CharactersData(Resource):
     def get(self, character_id):
         conn = db_connect.connect()
-        query = conn.execute("select * from characters where rowid =%d " % int(character_id))
+        query = conn.execute("select * from characters where id =%d " % int(character_id))
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
     def put(self, character_id):
         type = request.args['type']
         change = request.args['value']
-        conn = db_connect.connect()
-        query = conn.execute("update characters set '%s' ='%s' where rowid = %s " % (type, change, int(character_id)))
-        return {'status': 'Cambio de %s realizado' % type}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("update characters set '%s' ='%s' where id = %s " % (type, change, int(character_id)))
+            return {'status': 'Cambio de %s realizado' % type}
+        else:
+            return {'status': 'Not allowed'}
 
     def delete(self, character_id):
-        conn = db_connect.connect()
-        query = conn.execute("delete from characters where rowid= %d" % int(character_id))
-        return {'status': 'Character number %d deleted' % int(character_id)}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("delete from characters where id= %d" % int(character_id))
+            return {'status': 'Character number %d deleted' % int(character_id)}
+        else:
+            return {'status': 'Not allowed'}
 
 
 class LocationsData(Resource):
     def get(self, location_id):
         conn = db_connect.connect()
-        query = conn.execute("select * from locations where rowid =%d " % int(location_id))
+        query = conn.execute("select * from locations where id =%d " % int(location_id))
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
     def put(self, location_id):
         type = request.args['type']
         change = request.args['value']
-        conn = db_connect.connect()
-        query = conn.execute("update locations set '%s' ='%s' where rowid = %s " % (type, change, int(location_id)))
-        return {'status': 'Cambio de %s realizado' % type}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("update locations set '%s' ='%s' where id = %s " % (type, change, int(location_id)))
+            return {'status': 'Cambio de %s realizado' % type}
+        else:
+            return {'status': 'Not allowed'}
 
     def delete(self, location_id):
-        conn = db_connect.connect()
-        query = conn.execute("delete from locations where rowid= %d" % int(location_id))
-        return {'status': 'Character number %d deleted' % int(location_id)}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("delete from locations where id= %d" % int(location_id))
+            return {'status': 'Character number %d deleted' % int(location_id)}
+        else:
+            return {'status': 'Not allowed'}
 
 
 class EpisodesData(Resource):
     def get(self, episode_id):
         conn = db_connect.connect()
-        query = conn.execute("select * from episodes where rowid=%d " % int(episode_id))
+        query = conn.execute("select * from episodes where id=%d " % int(episode_id))
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
     def put(self, episode_id):
         type = request.args['type']
         change = request.args['value']
-        conn = db_connect.connect()
-        query = conn.execute("update episodes set '%s' ='%s' where rowid = %s " % (type, change, int(episode_id)))
-        return {'status': 'Cambio de %s realizado' % type}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("update episodes set '%s' ='%s' where id = %s " % (type, change, int(episode_id)))
+            return {'status': 'Cambio de %s realizado' % type}
+        else:
+            return {'status': 'Not allowed'}
 
     def delete(self, episode_id):
-        conn = db_connect.connect()
-        query = conn.execute("delete from episodes where rowid= %d" % int(episode_id))
-        return {'status': 'Character number %d deleted' % int(episode_id)}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("delete from episodes where id= %d" % int(episode_id))
+            return {'status': 'Character number %d deleted' % int(episode_id)}
+        else:
+            return {'status': 'Not allowed'}
 
 
 class CitiesData(Resource):
     def get(self, city_id):
         conn = db_connect.connect()
-        query = conn.execute("select * from cities where rowid=%d " % int(city_id))
+        query = conn.execute("select * from cities where id=%d " % int(city_id))
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return jsonify(result)
 
     def put(self, city_id):
         type = request.args['type']
         change = request.args['value']
-        conn = db_connect.connect()
-        query = conn.execute("update cities set '%s' ='%s' where rowid = %s " % (type, change, int(city_id)))
-        return {'status': 'Cambio de %s realizado' % type}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("update cities set '%s' ='%s' where id = %s " % (type, change, int(city_id)))
+            return {'status': 'Cambio de %s realizado' % type}
+        else:
+            return {'status': 'Not allowed'}
+
 
     def delete(self, city_id):
-        conn = db_connect.connect()
-        query = conn.execute("delete from cities where rowid= %d" % int(city_id))
-        return {'status': 'Character number %d deleted' % int(city_id)}
+        passApi = request.args['pass']
+        if passApi == 'ThePassApi':
+            conn = db_connect.connect()
+            query = conn.execute("delete from cities where id= %d" % int(city_id))
+            return {'status': 'Character number %d deleted' % int(city_id)}
+        else:
+            return {'status': 'Not allowed'}
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/documentation")
+def documentation():
+    return render_template("documentation.html")
 
 
 api.add_resource(Content, '/api', '/api/')
-api.add_resource(Characters, '/api/characters')
-api.add_resource(Locations, '/api/locations')
-api.add_resource(Cities, '/api/cities')
-api.add_resource(Episodes, '/api/episodes')
+api.add_resource(Characters, '/api/characters','/api/characters/')
+api.add_resource(Locations, '/api/locations','/api/locations')
+api.add_resource(Cities, '/api/cities','/api/cities')
+api.add_resource(Episodes, '/api/episodes', '/api/episodes/')
 api.add_resource(CharactersData, '/api/characters/<character_id>')  # route with parameter for changes
 api.add_resource(LocationsData, '/api/locations/<location_id>')
 api.add_resource(EpisodesData, '/api/episodes/<episode_id>')
 api.add_resource(CitiesData, '/api/cities/<city_id>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug = True)

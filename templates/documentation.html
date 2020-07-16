@@ -13,23 +13,23 @@
 	<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 		<div class="container">
 			<!-- <img src="../static/img/logo1.png" alt="logo"> -->
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" onclick="handlerApi('')">
 				<img src="../static/img/logo1.png" alt="logo">
 			</a>
-			<a class="navbar-brand" href="index.html">The simpsons Api</a>
+			<a class="navbar-brand" onclick="handlerApi('')">The simpsons Api</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" onclick="handlerApi('')">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="about.html">About</a>
+						<a class="nav-link" onclick="handlerApi('/about')">About</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="documentation.html">Documentation</a>
+						<a class="nav-link" onclick="handlerApi('/documentation')">Documentation</a>
 					</li>
 				</ul>
 			</div>
@@ -48,20 +48,20 @@
 			<div class="col-sm-12 col-md-3">
 				<h5>Getting Started</h5>
 				<ul class="list-group options mb-2">
-					<li class="list-group-item">Introduction</li>
-					<li class="list-group-item">Getting started</li>
-					<li class="list-group-item">Base URL</li>
-					<li class="list-group-item">Rate limiting</li>
-					<li class="list-group-item">Authentication</li>
-					<li class="list-group-item">Searching</li>
+					<li class="list-group-item"><a href="#Intro">Introduction</a></li>
+					<li class="list-group-item"><a href="#GettingStarted">Getting started</a></li>
+					<li class="list-group-item"><a href="#BaseUrl">Base URL</a></li>
+					<li class="list-group-item"><a href="#RateLimiting">Rate limiting</a></li>
+					<li class="list-group-item"><a href="#Authentication">Authentication</a></li>
+					<li class="list-group-item"><a href="#Searching">Searching</a></li>
 				</ul>
 				<h5>Resources</h5>
 				<ul class="list-group options mb-3">
-					<li class="list-group-item">Root</li>
-					<li class="list-group-item">Character</li>
-					<li class="list-group-item">Locations</li>
-					<li class="list-group-item">Cities</li>
-					<li class="list-group-item">Episodes</li>
+					<li class="list-group-item"><a href="#Root">Root</a></li>
+					<li class="list-group-item"><a href="#Characters">Character</a></li>
+					<li class="list-group-item"><a href="#Locations">Locations</a></li>
+					<li class="list-group-item"><a href="#Cities">Cities</a></li>
+					<li class="list-group-item"><a href="#Episodes">Episodes</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-12 col-md-9">
@@ -72,7 +72,7 @@
 					Please read the documentation before start your consults in this way you are going to know all the posibilities that you have with this amaizing Api. 
 				</p>
 				<hr>
-				<h3>Getting started</h3>
+				<h3 id="GettingStarted">Getting started</h3>
 				<span class="api-link">Link API: <p>http://sergobustos1.pythonanywhere.com/api/</p></span><br>
 				<p>Let's make our firt API request to the simpsons API!</p>
 				<p>You have many options to do the search you can use <a class="links" href="https://www.postman.com/" target="blank"><p>Postman</p></a>
@@ -84,23 +84,25 @@
 				<p>Here is the response we get:</p>
 				<figure><img src="../static/img/img2.png" alt="example 1"></figure>
 				<p>If tour response looks different don't worry. This is probably because more details or parameteres have been added to the API since we made this documentation.</p>
+				<br>
+				<p><strong>Remember:</strong> If you find a value with -1 is beacuse there is no certified data about it.</p>
 				<hr>
-				<h3>Base URL</h3>
+				<h3 id="BaseUrl">Base URL</h3>
 				<p>The <strong>Base URL</strong>is the root URL for all the API. If you ever make a request to <strong>The simpsons Api</strong> and you get back a <strong>404 NOT FOUND</strong>
 					check this URL first:
 				</p>
 				<figure><img class="small-image" src="../static/img/img3.png" alt="example request"></figure>
 				<p>The documentation below assumes you are going to use the Base Url to the endpoints in order to do multiple request</p>
 				<hr>
-				<h3>Rate limiting</h3>
+				<h3 id="RateLimiting">Rate limiting</h3>
 				<p><strong>The simpsons API</strong> don't limit the petitions that you can do daily but in order to help people in multiple areas like school, job or practice skills making petitions to an API</p>
 				<hr>
-				<h3>Authentication</h3>
+				<h3 id="Authentication">Authentication</h3>
 				<p><strong>The simpsons API</strong> is  a <strong>completely</strong> open <strong>API</strong>. No authentication is required to query and get data. This also mean that we have limited what you can do to just GET the data.
 					If you have mising information or any mistake please <a href=""><p>Send us a message</p></a> and we are going to solve this quicly.
 				</p>
 				<hr>
-				<h3>Searching</h3>
+				<h3 id="Searching">Searching</h3>
 				<p>All resources support <strong>Search</strong> parameters that filter the information you got. This allows you to make queries like:</p>
 				<span class="badge badge-secondary">http://sergobustos1.pythonanywhere.com/api/characters?status=alive</span>
 				<p>All searches will use case-sensitive partial matches on the set of search field. To see the set of search fields for each Resource, check out the individual documentation.</p>
@@ -108,7 +110,7 @@
 				<figure><img src="../static/img/img13.png" alt="search example"></figure>
 				<hr>
 				<h1>Resources</h1>
-				<h3>Root</h3>
+				<h3 id="Root">Root</h3>
 				<p>The Root source provides information on all available resources within the API.</p>
 				<p>Example request</p>
 				<figure><img class="small-image" src="../static/img/img3.png" alt="example request"></figure>
@@ -139,7 +141,7 @@
 				</ul>
 				<hr>
 				<!-- characters -->
-				<h3>Characters</h3>
+				<h3 id="Characters">Characters</h3>
 				<p>A character resource is an individual person or character within the Simpsons Universe.</p>
 				<br>
 				<p>Endpoints:</p>
@@ -185,6 +187,16 @@
 						<p>-- The link od our server where is located the .png image for this character</p>
 					</li>
 					<li>
+						<span class="badge badge-secondary">occupation</span>
+						<em>string</em>
+						<p>-- The last known occupation of this character.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">voice</span>
+						<em>string</em>
+						<p>-- The name of the person who makes the character's voice.</p>
+					</li>
+					<li>
 						<span class="badge badge-secondary">created</span>
 						<em>string</em>
 						<p>-- the date when was created this character. Will be "mm/dd/yyyy"</p>
@@ -206,8 +218,16 @@
 						<p>-- filter by status</p>
 					</li>
 					<li>
+						<span class="badge badge-secondary">apparition</span>
+						<p>-- Will show you all the characters that appears for first time into an eppisode.</p>
+					</li>
+					<li>
 						<span class="badge badge-secondary">age</span>
-						<p>-- filter by age</p>
+						<p>-- filter by age. Will show you all the characters that are older than the age parameter.</p>
+					</li>
+					<li>
+						<span class="badge badge-secondary">-age</span>
+						<p>-- filter by age. Will show you all the characters that are younger than the age parameter.</p>
 					</li>
 					<li>
 						<span class="badge badge-secondary">gender</span>
@@ -217,7 +237,7 @@
 				<hr>
 				<!-- end characters -->
 				<!-- locations -->
-				<h3>Locations</h3>
+				<h3 id="Locations">Locations</h3>
 				<p>A location resource is a building with a specific activity like banks, stores, public building.</p>
 				<br>
 				<p>Endpoints:</p>
@@ -281,7 +301,7 @@
 				<hr>
 				<!-- end locations -->
 				<!-- cities -->
-				<h3>Cities</h3>
+				<h3 id="Cities">Cities</h3>
 				<p>A city resource is a specific place in the simpsons universe.</p>
 				<br>
 				<p>Endpoints:</p>
@@ -334,16 +354,18 @@
 						<p>-- filter by name</p>
 					</li>
 					<li>
+						<span class="badge badge-secondary">-population</span>
+						<p>-- filter the cities that has population under the parameter.</p>
+					</li>
+					<li>
 						<span class="badge badge-secondary">population</span>
-						<p>-- filter by rangs of population. To use this send two parameters <strong>populationinit</strong>
-							with a number and <strong>populationend</strong> also with a number
-						</p>
+						<p>-- filter the cities that has more population than the parameter.</p>
 					</li>
 				</ul>
 				<hr>
 				<!-- end cities -->
 				<!-- episodes -->
-				<h3>Episodes</h3>
+				<h3 id="Episodes">Episodes</h3>
 				<p>An episode resource is a chapter of the simpsons universe</p>
 				<br>
 				<p>Endpoints:</p>
@@ -418,18 +440,18 @@
 			</div>
 		</div>
 	</div>
-	<!-- footer -->
+<!-- footer -->
 <footer id="footer" class="pb-4 pt-4">
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-12 col-lg">
-				<a href="index.html">Home</a>
+				<a onclick="handlerApi('')">Home</a>
 			</div>
 			<div class="col-12 col-lg">
-				<a href="about.html">About</a>
+				<a onclick="handlerApi('/about')">About</a>
 			</div>
 			<div class="col-12 col-lg">
-				<a href="documentation.html">Documentation</a>
+				<a onclick="handlerApi('/documentation')">Documentation</a>
 			</div>
 		</div>
 	</div>
