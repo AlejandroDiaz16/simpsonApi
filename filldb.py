@@ -11,11 +11,12 @@ cant_characters = int(df_characters['Name'].apply(type).value_counts())
 
 def insertAllCharacters():
     conn = db_connect.connect()
-    query1 = conn.execute('delete from characters')
+    # query1 = conn.execute('delete from characters')
     for i in range(cant_characters):
         query = conn.execute("insert into characters values("
                              "'%s','%s','%s','%s','%s','%s','%s'"
-                             ",'%s','%s','%s','%s')" % (i+1, df_characters['Name'][i],
+                             ",'%s','%s','%s','%s')" % (i+1,
+                                                        df_characters['Name'][i],
                                                         df_characters['Age'][i],
                                                         df_characters['Status'][i],
                                                         df_characters['Gender'][i],
@@ -75,12 +76,7 @@ def insertAllLocations():
     conn.close()
 
 
-operationsAdd = {'1': insertAllCharacters()}
-option = input("What do you want to do today:\n1 - Add\n2 - Delete\n3 - Update\n")
-
-if option == 1:
-    secondary = input("1 allcharacters 2 allcities 3 onecharacter")
-    operationsAdd[secondary]
+insertAllCharacters()
 
 conn = db_connect.connect()
 query = conn.execute("select * from characters")
